@@ -45,8 +45,8 @@ INSERT INTO orders_statuses (uuid, title) VALUES
  
 -- Orders
  INSERT INTO orders (user_id, payment_id, order_status_id, uuid, products, address, amount, delivery_fee, shipped_at) VALUES 
-  (1, 1, 1, 'order_uuid_1', '{"product_id": 1, "quantity": 2}', '{"street": "123 St.", "city": "Natal", "country": "Brazil"}', 2000.00, 20.00, NULL),
-  (2, 2, 2, 'order_uuid_2', '{"product_id": 2, "quantity": 1}', '{"street": "456 St.", "city": "Riacho de Santana", "country": "Brazil"}', 60.00, 10.00, NOW());
+  (1, 1, 1, 'order_uuid_1', '{"product_id": 1}', '{"street": "123 St.", "city": "Natal", "country": "Brazil"}', 2000.00, 20.00, NULL),
+  (2, 2, 2, 'order_uuid_2', '{"product_id": 2}', '{"street": "456 St.", "city": "Riacho de Santana", "country": "Brazil"}', 60.00, 10.00, NOW());
  
  
  
