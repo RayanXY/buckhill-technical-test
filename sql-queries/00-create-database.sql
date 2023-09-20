@@ -22,7 +22,7 @@ CREATE TABLE products (
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP,
 	PRIMARY KEY(id),
-	FOREIGN KEY (category_id) REFERENCES categories(id)
+	FOREIGN KEY(category_id) REFERENCES categories(id)
 );
 
 CREATE TABLE users (
@@ -57,7 +57,7 @@ CREATE TABLE jwt_tokens (
 	updated_at TIMESTAMP,
 	expires_at TIMESTAMP,
 	PRIMARY KEY(id),
-	FOREIGN KEY (user_id) REFERENCES users(id)
+	FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 CREATE TABLE payments (
@@ -93,7 +93,7 @@ CREATE TABLE orders (
 	created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	PRIMARY KEY(id),
-	FOREIGN KEY (user_id) REFERENCES users(id),
-	FOREIGN KEY (payment_id) REFERENCES payments(id),
-	FOREIGN KEY (order_status_id) REFERENCES orders_statuses(id)
+	FOREIGN KEY(user_id) REFERENCES users(id),
+	FOREIGN KEY(payment_id) REFERENCES payments(id),
+	FOREIGN KEY(order_status_id) REFERENCES orders_statuses(id)
 );
