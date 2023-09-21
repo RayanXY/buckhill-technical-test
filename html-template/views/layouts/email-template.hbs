@@ -2,21 +2,23 @@
 <html>
   <head>
     <link rel="stylesheet" href="src/css/styles.css">
-
     <title>{{ title }}</title>
-    
   </head>
+
   <body>
+    {{#with order as | order |}}
     <div class="container">
       <div>
         <img src="/images/header.png" width="100%" height="280">
       </div>
 
+      {{#with order.user}}
       <p>
-        Dear [user’s last name] [user’s first name] [user’s middle name IF PRESENT IN DATA],
-        We are contacting you because there is an amount due on your purchase
-        [purchase id]:
+        Dear {{upper last_name }} {{ first_name }}{{#if middle_name }} {{ middle_name }}{{/if}},
+        we are contacting you because there is an amount due on your purchase
+        {{ order.uuid }}:
       </p>
+      {{/with}}
 
       <div class="cs-center">
         <table>
@@ -25,7 +27,7 @@
           </tr>
           <tr>
             <td>Date</td>
-            <td colspan="2">Date</td>
+            <td colspan="2">{{date order.created_at }}</td>
           </tr>
           <tr class="cs-row">
             <td>Quantity</td>
@@ -72,5 +74,6 @@
         <p>Petson Team</p>
       </div>
     </div>
+    {{/with}}
   </body>
 </html>
