@@ -7,7 +7,7 @@ body {
 }
 
 table {
-  width: 400px;
+  width: 450px;
   border-collapse: collapse;
 }
 
@@ -51,6 +51,10 @@ th {
   text-align: center;
   border-radius: 20px;
   background-color: #352F4B;
+}
+
+.cs-price {
+  white-space: nowrap;
 }
 
 a:link {

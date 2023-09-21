@@ -2,7 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="src/css/styles.css">
-    <title>{{ title }}</title>
+    <title>{{title}}</title>
   </head>
 
   <body>
@@ -14,9 +14,9 @@
 
       {{#with order.user}}
       <p>
-        Dear {{upper last_name }} {{ first_name }}{{#if middle_name }} {{ middle_name }}{{/if}},
+        Dear {{upper last_name}} {{first_name}}{{#if middle_name }} {{middle_name}}{{/if}},
         we are contacting you because there is an amount due on your purchase
-        {{ order.uuid }}:
+        {{order.uuid}}:
       </p>
       {{/with}}
 
@@ -26,44 +26,53 @@
             <th colspan="3" class="table-header">The table header</th>
           </tr>
           <tr>
-            <td>Date</td>
-            <td colspan="2">{{date order.created_at }}</td>
+            <td>Date:</td>
+            <td colspan="2">{{date order.created_at}}</td>
           </tr>
+          {{#each order.products}}
           <tr class="cs-row">
-            <td>Quantity</td>
-            <td>Name</td>
-            <td>Price</td>
+            <td>{{quantity}}</td>
+            <td>{{product}}</td>
+            <td class="cs-price">{{price}} Kn</td>
           </tr>
-          <tr class="cs-row">
-            <td>Quantity</td>
-            <td>Name</td>
-            <td>Price</td>
-          </tr>
-          <tr class="cs-row">
-            <td>Quantity</td>
-            <td>Name</td>
-            <td>Price</td>
-          </tr>
+          {{/each}}
           <tr>
             <td></td>
             <td><strong>Total amount</strong></td>
-            <td>Amount Kn</td>
+            <td class="cs-price">
+              <strong>{{sum amount delivery_fee}} Kn</strong>
+            </td>
           </tr>
           <tr class="cs-row">
             <td></td>
             <td><strong>Amount paid</strong></td>
-            <td>Amount paid Kn</td>
+            <td class="cs-price">
+              <strong>
+                {{#if amount_paid}}
+                  {{amount_paid}}
+                {{else}}
+                  0 
+                {{/if}}
+                Kn
+              </strong>
+            </td>
           </tr>
         </table>        
       </div>
 
       <p>
-        According to our records, the amount due is [amount due] Kn. Please, click on the next
-        button to pay this difference:
+        According to our records, the amount due is
+        {{#if amount_paid}}
+          {{amountDue amount delivery_fee amount_paid}}
+        {{else}}
+          {{amountDue amount delivery_fee 0}}
+        {{/if}}
+        Kn. Please, click on the next
+        button <strong>to pay</strong> this difference:
       </p>
 
       <div class="cs-button">
-        <a href="" >
+        <a href="https://pet-shop.buckhill.com.hr/checkout" >
           <strong>PAY NOW</strong>
         </a>
       </div>

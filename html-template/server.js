@@ -11,7 +11,7 @@ const port = 3000;
 
 const password = 'admin';
 const email = 'admin@buckhill.co.uk';
-const authUrl = 'http://pet-shop.buckhill.com.hr/api/v1/admin/login'
+const authUrl = 'http://pet-shop.buckhill.com.hr/api/v1/admin/login';
 
 // "public" folder
 app.use(express.static(path.resolve('./public')));
@@ -21,7 +21,10 @@ app.use('/public', express.static(path.resolve('./public')));
 app.use(express.static(path.resolve('./src')));
 app.use('/src', express.static(path.resolve('./src')));
 
-const orders = await getAllOrders()
+// Get all orders
+const orders = await getAllOrders();
+
+console.log('TYPE', typeof(orders[0].delivery_fee + orders[0].amount));
 
 app.get('/', (req, res) => {
   const source = readFileSync('views/layouts/email-template.hbs', 'utf8');
@@ -29,7 +32,7 @@ app.get('/', (req, res) => {
 
   const data = {
     title: 'Email Template',
-    order: orders[0],
+    order: orders[1],
   };
 
   const html = template(data);
@@ -50,11 +53,11 @@ async function authenticate() {
   try {
     const response = axios.post(authUrl, requestBody, {
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
       }
     });
     
-    return (await response).data.data.token
+    return (await response).data.data.token;
   } catch(error) {
     console.error('Authentication error:', error.response.data);
     throw new Error('Authentication failed');
@@ -69,11 +72,11 @@ async function getAllOrders() {
     const response = axios.get(allOrdersUrl, {
       headers: {
         'accept': '*/*',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
       }
     });
 
-    return (await response).data.data
+    return (await response).data.data;
   } catch(error) {
     console.error('Error:', error);
   }
@@ -85,5 +88,13 @@ pkg.registerHelper('upper', function(str) {
 });
 
 pkg.registerHelper('date', function(date) {
-  return new Date(date).toLocaleDateString()
+  return new Date(date).toLocaleDateString();
+});
+
+pkg.registerHelper('sum', function(a, b) {
+  return a + b;
+});
+
+pkg.registerHelper('amountDue', function(amount, deliveryFee, amountPaid) {
+  return (amount + deliveryFee) - amountPaid;
 });
