@@ -1,20 +1,27 @@
 import express from 'express';
-import { readFileSync } from 'fs';
 import pkg from 'handlebars';
+import path from 'path';
 const { compile } = pkg;
+import { readFileSync } from 'fs';
 import axios from 'axios';
 
 const app = express();
 const port = 3000;
+
+// "public" folder
+app.use(express.static(path.resolve('./public')));
+app.use('/public', express.static(path.resolve('./public')));
+
+// "src" folder
+app.use(express.static(path.resolve('./src')));
+app.use('/src', express.static(path.resolve('./src')));
 
 app.get('/', (req, res) => {
   const source = readFileSync('views/layouts/email-template.hbs', 'utf8');
   const template = compile(source);
 
   const data = {
-    title: 'This will be an email template',
-    name: 'Rayan Santos',
-    message: 'See ya!'
+    title: 'Email Template',
   };
 
   const html = template(data);
