@@ -26,6 +26,6 @@ After all the testing, debugging, and finally finding the source of the issue, w
 
 Following the correction, we need the QA Team to validate the application thoroughly to ensure that issue is solved.
 
-#### Inform the client
+#### Contact with the client
 
 Finally, I would reach out the client, informing of the issue resolution, apologize for any inconvenience caused, and confirm that they can now proceed with their purchase.
